@@ -1,0 +1,11 @@
+{
+  "name": "sandro/elevator-task",
+  "autoload": {
+    "psr-4": {
+      "Elevator\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  }
+}
