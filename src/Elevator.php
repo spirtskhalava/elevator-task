@@ -67,22 +67,25 @@ class Elevator {
 
         foreach ($this->cameras as $camera) {
             $type = $camera->getCamera();
+            if ($type === "A") {
+                $cameraA = $camera;
+            } elseif ($type === "B") {
+                $cameraB = $camera;
+            }
+        }
+
+        foreach ($this->cameras as $camera) {
+            $type = $camera->getCamera();
             $peopleCount = $camera->getPeopleCount();
 
             switch ($type) {
                 case "A":
-                    $totalCount += $peopleCount;
-                    break;
                 case "B":
                     if ($A && $A->getPeopleCount() >= 1) {
                         $totalCount += $peopleCount;
                     }
                     break;
-                case "C":
-                    if ($A && $A->getPeopleCount() >= 3) {
-                        $totalCount += $peopleCount;
-                    }
-                    break;    
+                case "C": 
 
                 case "D":
                     if ($A && $A->getPeopleCount() >= 3) {
