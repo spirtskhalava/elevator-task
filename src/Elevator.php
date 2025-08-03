@@ -10,7 +10,7 @@ abstract class Camera {
         $this->peopleCountInRoom = $peopleCountInRoom;
     }
 
-    public function getPopleCount(): int {
+    public function getPeopleCount(): int {
         return $this->peopleCountInRoom;
     }
 
@@ -66,35 +66,32 @@ class Elevator {
         $B = null;
 
         foreach ($this->cameras as $camera) {
-            switch ($camera->getCamera()) {
-                case "A":
-                    $A = $camera;
-                    break;
-                case "B":
-                    $B = $camera;
-                    break;
-            }
-        }
-
-        foreach ($this->cameras as $camera) {
             $type = $camera->getCamera();
-            $peopleCount = $camera->getPopleCount();
+            $peopleCount = $camera->getPeopleCount();
 
             switch ($type) {
+                case "A":
+                    $totalCount += $peopleCount;
+                    break;
                 case "B":
-                    if ($A && $A->getPopleCount() >= 1) {
+                    if ($A && $A->getPeopleCount() >= 1) {
                         $totalCount += $peopleCount;
                     }
                     break;
+                case "C":
+                    if ($A && $A->getPeopleCount() >= 3) {
+                        $totalCount += $peopleCount;
+                    }
+                    break;    
 
                 case "D":
-                    if ($A && $A->getPopleCount() >= 3) {
+                    if ($A && $A->getPeopleCount() >= 3) {
                         $totalCount += $peopleCount;
                     }
                     break;
 
                 case "E":
-                    if ($A && $B && $A->getPopleCount() >= 1 && $B->getPopleCount() >= 2) {
+                    if ($A && $B && $A->getPeopleCount() >= 1 && $B->getPeopleCount() >= 2) {
                         $totalCount += $peopleCount;
                     }
                     break;
@@ -113,7 +110,7 @@ class Elevator {
         foreach ($this->cameras as $camera) {
             $details[] = [
                 'type' => $camera->getCamera(),
-                'people' => $camera->getPopleCount()
+                'people' => $camera->getPeopleCount()
             ];
         }
         return $details;
